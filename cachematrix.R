@@ -37,12 +37,12 @@ cacheSolve <- function(x, ...) {
         message("getting cached data")
         return(i)
     }
-    if(!(nrow(i)==ncol(i))) {
+    data <- x$get()
+    if(!(nrow(data) == ncol(data))) { #if not a square matrix then
         message("The Matrix isn't a Square! Exiting...")
         stop()
-    } else { ##go ahead and find the inverse
-        data <- x$get()
-        i <- Solve(data, ...)
+    } else { 
+        i <- solve(data, ...)
         x$setinverse(i)
         i
     }
